@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    
+    "dev": "tsnd --respawn src/main.ts",
+    "start": "node build/main.js",
+    "postinstall": "tsc"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,16 @@
   "bugs": {
     "url": "https://github.com/LeanidRymkevich/ITra_Final_Project_Backend/issues"
   },
-  "homepage": "https://github.com/LeanidRymkevich/ITra_Final_Project_Backend#readme"
+  "homepage": "https://github.com/LeanidRymkevich/ITra_Final_Project_Backend#readme",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.4",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0"
+  }
 }

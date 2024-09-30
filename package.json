@@ -1,0 +1,19 @@
+{
+  "name": "itra_final_project_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeanidRymkevich/ITra_Final_Project_Backend.git"
+  },
+  "author": "Leanid Rymkevich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeanidRymkevich/ITra_Final_Project_Backend/issues"
+  },
+  "homepage": "https://github.com/LeanidRymkevich/ITra_Final_Project_Backend#readme"
+}

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "tsnd --respawn src/main.ts",
     "start": "node build/main.js",
-    "postinstall": "tsc"
+    "postinstall": "tsc",
+    "heroku": "git push heroku main"
   },
   "repository": {
     "type": "git",

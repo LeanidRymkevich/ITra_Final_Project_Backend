@@ -3,7 +3,18 @@
   "SignIn": "Sign In",
   "SignUp": "Sign Up",
   "SearchResults": "Search results",
-  "Templates": "Templates",
+  "Template": "Template",
+  "TemplateEditor": "Template's editor",
+  "TemplateForms": "Template's forms",
+  "TemplateSettings": "Template's settings",
+  "TemplateStatistics": "Template's statistics",
   "UserPage": "User's Page",
-  "AdminPage": "Admin's Page"
+  "UserTemplates": "User's templates",
+  "UserForms": "User's forms",
+  "AdminPage": "Admin's Page",
+
+  "SearchPlaceholder": "Search...",
+
+  "LanguageEn": "English",
+  "LanguageRu": "Russian"
 }

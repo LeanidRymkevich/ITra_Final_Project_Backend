@@ -4,6 +4,17 @@
   "SignUp": "Зарегистрироваться",
   "SearchResults": "Результаты поиска",
   "Templates": "Шаблоны",
+  "TemplateEditor": "Редактор шаблона",
+  "TemplateForms": "Формы шаблона",
+  "TemplateSettings": "Настройки шаблона",
+  "TemplateStatistics": "Статистики шаблона",
   "UserPage": "Страница пользователя",
-  "AdminPage": "Страница администратора"
+  "UserTemplates": "Шаблоны пользователя",
+  "UserForms": "Формы пользователя",
+  "AdminPage": "Страница администратора",
+
+  "SearchPlaceholder": "Поиск...",
+
+  "LanguageEn": "Английский",
+  "LanguageRu": "Русский"
 }

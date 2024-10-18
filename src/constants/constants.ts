@@ -1,3 +1,4 @@
+const DEFAULT_PORT = '3001';
 const LOCALES_ROOT_FOLDER = 'src/locales';
 
-export { LOCALES_ROOT_FOLDER };
+export { LOCALES_ROOT_FOLDER, DEFAULT_PORT };

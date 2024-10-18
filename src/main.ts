@@ -1,8 +1,9 @@
-import "dotenv/config";
+import 'dotenv/config';
 
-import app from "./app";
+import app from './app';
 
-const DEFAULT_PORT = "3001";
+import { DEFAULT_PORT } from './constants/constants';
+
 const PORT = process.env.PORT || DEFAULT_PORT;
 
 app(PORT);

@@ -10,6 +10,4 @@ const mode: DevelopmentMode =
 const config: Options = configs[mode];
 const db = new Sequelize(config);
 
-// db.addModels([Admin]);
-
 export default db;

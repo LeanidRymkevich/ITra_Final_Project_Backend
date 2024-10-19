@@ -1,3 +1,5 @@
 node_modules
 
 /build
+
+#.env must be added to .gitignore, but as repository is private and in learning goals is revealed

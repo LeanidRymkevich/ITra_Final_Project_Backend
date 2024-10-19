@@ -1,7 +1,7 @@
 {
   "Main": "Main",
-  "SignIn": "Sign In",
-  "SignUp": "Sign Up",
+  "SignIn": "Sign in",
+  "SignUp": "Sign up",
   "SearchResults": "Search results",
   "Template": "Template",
   "TemplateEditor": "Template's editor",
@@ -13,6 +13,10 @@
   "UserForms": "User's forms",
   "AdminPage": "Admin's Page",
   "NotFoundPage": "Page Not Found",
+  "SignOut": "Sign out",
+
+  "WelcomeMsg": "Welcome",
+
 
   "SearchPlaceholder": "Search...",
 

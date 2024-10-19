@@ -13,6 +13,9 @@
   "UserForms": "Формы пользователя",
   "AdminPage": "Страница администратора",
   "NotFoundPage": "Страница не найдена",
+  "SignOut": "Выйти",
+
+  "WelcomeMsg": "Добро пожаловать",
 
   "SearchPlaceholder": "Поиск...",
 

@@ -26,6 +26,7 @@ enum ERROR_MSGs {
   USER_IS_BLOCKED = 'User with such an email is blocked',
   NO_TOKEN = 'Request does not contain an authorization token',
   INVALID_TOKEN = 'Invalid token',
+  NO_PASSWORD = 'No password provided',
 }
 
 export { ENDPOINTS, USER_ROLES, USER_STATUS, AUTH_ENDPOINTS, ERROR_MSGs };

@@ -1,14 +1,14 @@
 import { Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { JsonWebTokenError, sign } from 'jsonwebtoken';
+import { sign, verify } from 'jsonwebtoken';
 import { UniqueConstraintError, ValidationError } from 'sequelize';
 import { hashSync, compare } from 'bcryptjs';
 
 import { ERROR_MSGs, USER_STATUS } from '../types/enums';
 
 import User from '../db/models/User';
-import { respWithError } from './respUtils';
 import { AuthError } from '../errors/AuthError';
+import { respWithError } from './respUtils';
 
 const createToken = (id: string) => {
   return sign({ id }, process.env.JWT_SECRET!);
@@ -33,6 +33,12 @@ const handleCreateUserErrors = (resp: Response, error: unknown): void => {
     respWithError(resp, StatusCodes.BAD_REQUEST, error.message);
     return;
   }
+
+  if (error instanceof AuthError) {
+    respWithError(resp, error.code, error.message);
+    return;
+  }
+
   throw error;
 };
 
@@ -64,12 +70,16 @@ const handleTokenValidationErrors = (resp: Response, error: unknown): void => {
     return;
   }
 
-  if (error instanceof JsonWebTokenError) {
-    respWithError(resp, StatusCodes.UNAUTHORIZED, ERROR_MSGs.INVALID_TOKEN);
-    return;
-  }
-
   throw error;
+};
+
+const verifyToken = (token: string): string => {
+  try {
+    const { id } = verify(token, process.env.JWT_SECRET!) as { id: string };
+    return id;
+  } catch {
+    throw new AuthError(ERROR_MSGs.INVALID_TOKEN, StatusCodes.UNAUTHORIZED);
+  }
 };
 
 export {
@@ -80,4 +90,5 @@ export {
   handleSignInErrors,
   checkUserStatus,
   handleTokenValidationErrors,
+  verifyToken,
 };

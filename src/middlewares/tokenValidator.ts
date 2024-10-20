@@ -1,4 +1,3 @@
-import { verify } from 'jsonwebtoken';
 import { Response, Request, NextFunction } from 'express';
 
 import User from '../db/models/User';
@@ -10,6 +9,7 @@ import { AuthError } from '../errors/AuthError';
 import {
   checkUserStatus,
   handleTokenValidationErrors,
+  verifyToken,
 } from '../utils/authUtils';
 
 const tokenValidator = async (
@@ -25,7 +25,7 @@ const tokenValidator = async (
 
     // authorization pattern 'Bearer [token string without brackets]'
     const token = authorization.split(' ')[1]!;
-    const { id } = verify(token, process.env.JWT_SECRET!) as { id: string };
+    const id = verifyToken(token);
     const user: User | null = await User.findOne({ where: { id } });
 
     checkUserStatus(user);

@@ -10,6 +10,8 @@ import {
   handleSignInErrors,
 } from '../utils/authUtils';
 import { respWithData } from '../utils/respUtils';
+import { AuthError } from '../errors/AuthError';
+import { ERROR_MSGs } from '../types/enums';
 
 const sendCheckTokenResp = (_req: Request, resp: Response): void => {
   respWithData(resp, StatusCodes.OK, {});
@@ -19,6 +21,9 @@ const signUp = async (req: Request, resp: Response): Promise<void> => {
   const { email, password, username } = req.body;
 
   try {
+    if (!password)
+      throw new AuthError(ERROR_MSGs.NO_PASSWORD, StatusCodes.BAD_REQUEST);
+
     const { id, role, status } = await User.create({
       email,
       username,

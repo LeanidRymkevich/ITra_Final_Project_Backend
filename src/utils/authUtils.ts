@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { sign } from 'jsonwebtoken';
+import { JsonWebTokenError, sign } from 'jsonwebtoken';
 import { UniqueConstraintError, ValidationError } from 'sequelize';
 import { hashSync, compare } from 'bcryptjs';
 
@@ -11,7 +11,7 @@ import { respWithError } from './respUtils';
 import { AuthError } from '../errors/AuthError';
 
 const createToken = (id: string) => {
-  return sign({ id }, process.env.JWT_SECRET as string);
+  return sign({ id }, process.env.JWT_SECRET!);
 };
 
 const hashPassword = (password: string): string => {
@@ -36,18 +36,36 @@ const handleCreateUserErrors = (resp: Response, error: unknown): void => {
   throw error;
 };
 
-const signInChecks = (user: User | null, password: string): void => {
+const checkUserStatus = (user: User | null): void => {
   if (!user)
     throw new AuthError(ERROR_MSGs.NO_SUCH_USER, StatusCodes.NOT_FOUND);
-  if (!compare(password, user.password))
-    throw new AuthError(ERROR_MSGs.WRONG_PASSWORD, StatusCodes.UNAUTHORIZED);
   if (user.status === USER_STATUS.BLOCKED)
     throw new AuthError(ERROR_MSGs.USER_IS_BLOCKED, StatusCodes.UNAUTHORIZED);
+};
+
+const signInChecks = (user: User | null, password: string): void => {
+  checkUserStatus(user);
+  if (!compare(password, user!.password))
+    throw new AuthError(ERROR_MSGs.WRONG_PASSWORD, StatusCodes.UNAUTHORIZED);
 };
 
 const handleSignInErrors = (resp: Response, error: unknown): void => {
   if (error instanceof AuthError) {
     respWithError(resp, error.code, error.message);
+    return;
+  }
+
+  throw error;
+};
+
+const handleTokenValidationErrors = (resp: Response, error: unknown): void => {
+  if (error instanceof AuthError) {
+    respWithError(resp, error.code, error.message);
+    return;
+  }
+
+  if (error instanceof JsonWebTokenError) {
+    respWithError(resp, StatusCodes.UNAUTHORIZED, ERROR_MSGs.INVALID_TOKEN);
     return;
   }
 
@@ -60,4 +78,6 @@ export {
   handleCreateUserErrors,
   signInChecks,
   handleSignInErrors,
+  checkUserStatus,
+  handleTokenValidationErrors,
 };

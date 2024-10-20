@@ -11,6 +11,10 @@ import {
 } from '../utils/authUtils';
 import { respWithData } from '../utils/respUtils';
 
+const sendCheckTokenResp = (_req: Request, resp: Response): void => {
+  respWithData(resp, StatusCodes.OK, {});
+};
+
 const signUp = async (req: Request, resp: Response): Promise<void> => {
   const { email, password, username } = req.body;
 
@@ -50,4 +54,4 @@ const signIn = async (req: Request, resp: Response): Promise<void> => {
   }
 };
 
-export { signUp, signIn };
+export { signUp, signIn, sendCheckTokenResp };

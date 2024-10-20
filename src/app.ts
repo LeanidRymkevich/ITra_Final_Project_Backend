@@ -5,12 +5,12 @@ import 'express-async-errors';
 import db from './db/db';
 
 import { ENDPOINTS } from './types/enums';
-
 import {
   LOCALES_ROOT_FOLDER,
   SERVER_RUNNING_MSG,
   DB_CONNECTION_FAILURE_MSG,
 } from './constants/constants';
+
 import authRouter from './routes/auth';
 import errorHandler from './middlewares/errorHandler';
 

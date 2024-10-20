@@ -1,11 +1,30 @@
-import { DataTypes } from 'sequelize';
+import {
+  CreationOptional,
+  DataTypes,
+  InferAttributes,
+  InferCreationAttributes,
+  Model,
+} from 'sequelize';
 
 import { USER_ROLES, USER_STATUS } from '../../types/enums';
 import db from '../db';
 
-const User = db.define(
-  'User',
+class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
+  declare id: CreationOptional<number>;
+  declare username: string;
+  declare email: string;
+  declare password: string;
+  declare role: CreationOptional<USER_ROLES>;
+  declare status: CreationOptional<USER_STATUS>;
+}
+
+User.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -41,6 +60,7 @@ const User = db.define(
     },
   },
   {
+    sequelize: db,
     indexes: [
       {
         unique: true,

@@ -19,4 +19,11 @@ enum USER_STATUS {
   ACTIVE = 'active',
 }
 
-export { ENDPOINTS, USER_ROLES, USER_STATUS, AUTH_ENDPOINTS };
+enum ERROR_MSGs {
+  EMAIL_ALREADY_IN_USE = 'User with such an email already exists',
+  NO_SUCH_USER = 'User with such an email not found',
+  WRONG_PASSWORD = 'Wrong password',
+  USER_IS_BLOCKED = 'User with such an email is blocked',
+}
+
+export { ENDPOINTS, USER_ROLES, USER_STATUS, AUTH_ENDPOINTS, ERROR_MSGs };

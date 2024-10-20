@@ -6,7 +6,11 @@ import db from './db/db';
 
 import { ENDPOINTS } from './types/enums';
 
-import { LOCALES_ROOT_FOLDER } from './constants/constants';
+import {
+  LOCALES_ROOT_FOLDER,
+  SERVER_RUNNING_MSG,
+  DB_CONNECTION_FAILURE_MSG,
+} from './constants/constants';
 import authRouter from './routes/auth';
 import errorHandler from './middlewares/errorHandler';
 
@@ -24,10 +28,14 @@ const app = async (port: string): Promise<void> => {
   // error in routes handling
   server.use(errorHandler);
 
-  await db.sync();
-  server.listen(port, (): void => {
-    console.log(`Server running on the port ${port}`);
-  });
+  try {
+    await db.sync();
+    server.listen(port, (): void => {
+      console.log(`${SERVER_RUNNING_MSG} ${port}`);
+    });
+  } catch (error) {
+    console.log(DB_CONNECTION_FAILURE_MSG, error);
+  }
 };
 
 export default app;

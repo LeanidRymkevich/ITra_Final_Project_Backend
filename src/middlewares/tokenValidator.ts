@@ -29,7 +29,7 @@ const tokenValidator = async (
     const user: User | null = await User.findOne({ where: { id } });
 
     checkUserStatus(user);
-    req.body.user_id = user!.id;
+    req.body.user = user;
     return next();
   } catch (error) {
     handleTokenValidationErrors(resp, error);

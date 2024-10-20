@@ -4,7 +4,7 @@ import {
   signUp,
   signIn,
   sendCheckTokenResp,
-} from '../controllers/authControllers';
+} from '../controllers/authController';
 import tokenValidator from '../middlewares/tokenValidator';
 
 import { AUTH_ENDPOINTS, ENDPOINTS } from '../types/enums';

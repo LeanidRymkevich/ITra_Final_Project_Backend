@@ -12,6 +12,7 @@ import {
 import { respWithData } from '../utils/respUtils';
 import { AuthError } from '../errors/AuthError';
 import { ERROR_MSGs } from '../types/enums';
+import { delPasswordField } from '../utils/dataTransformUtils';
 
 const sendCheckTokenResp = (_req: Request, resp: Response): void => {
   respWithData(resp, StatusCodes.OK, {});
@@ -49,9 +50,8 @@ const signIn = async (req: Request, resp: Response): Promise<void> => {
     });
 
     signInChecks(user, password);
-    const { id, username, role, status } = user!;
-    const data = { id, username, email, status, role };
-    const token = createToken(`${id}`);
+    const data = delPasswordField(user!);
+    const token = createToken(`${data.id}`);
 
     respWithData(resp, StatusCodes.OK, data, token);
   } catch (error) {

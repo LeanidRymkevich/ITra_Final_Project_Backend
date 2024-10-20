@@ -12,6 +12,8 @@ import {
 } from './constants/constants';
 
 import authRouter from './routes/auth';
+import adminRouter from './routes/admin';
+
 import errorHandler from './middlewares/errorHandler';
 
 const app = async (port: string): Promise<void> => {
@@ -23,6 +25,8 @@ const app = async (port: string): Promise<void> => {
 
   // endpoints
   server.use(ENDPOINTS.AUTH, authRouter);
+  server.use(ENDPOINTS.ADMIN, adminRouter);
+
   server.use(ENDPOINTS.LOCALES, express.static(LOCALES_ROOT_FOLDER));
 
   // error in routes handling

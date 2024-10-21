@@ -8,7 +8,7 @@ import { StatusCodes } from 'http-status-codes';
 import CustomError from '../errors/CustomError';
 
 import { checkUserStatus, verifyToken } from '../utils/authUtils';
-import { handleTokenValidationErrors } from '../utils/respUtils';
+import { handleCustomErrorOnly } from '../utils/respUtils';
 
 const tokenValidator = async (
   req: Request,
@@ -30,7 +30,7 @@ const tokenValidator = async (
     req.body.user = user;
     return next();
   } catch (error) {
-    handleTokenValidationErrors(resp, error);
+    handleCustomErrorOnly(resp, error);
   }
 };
 

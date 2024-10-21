@@ -61,7 +61,7 @@ const handleSignUpErrors = (resp: Response, error: unknown): void => {
   }
 };
 
-const handleTokenValidationErrors = (resp: Response, error: unknown): void => {
+const handleCustomErrorOnly = (resp: Response, error: unknown): void => {
   if (error instanceof CustomError) {
     handleCustomError(resp, error);
   } else {
@@ -74,5 +74,5 @@ export {
   respWithData,
   handleSignInErrors,
   handleSignUpErrors,
-  handleTokenValidationErrors,
+  handleCustomErrorOnly,
 };

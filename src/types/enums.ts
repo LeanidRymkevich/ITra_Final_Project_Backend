@@ -29,6 +29,7 @@ enum ERROR_MSGs {
   INVALID_TOKEN = 'Invalid token.',
   NO_PASSWORD = 'No password provided.',
   NOT_ENOUGH_RIGHTS = 'Not enough rights! Only admin can manipulate with users and other admins.',
+  NO_USER_WITH_SUCH_ID = 'No user with such an id',
 }
 
 export { ENDPOINTS, USER_ROLES, USER_STATUS, AUTH_ENDPOINTS, ERROR_MSGs };

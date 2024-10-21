@@ -19,7 +19,7 @@ const hashPassword = (password: string): string => {
   return hashSync(password, saltLength);
 };
 
-const handleCreateUserErrors = (resp: Response, error: unknown): void => {
+const handleDBValidationErrors = (resp: Response, error: unknown): void => {
   if (error instanceof UniqueConstraintError) {
     respWithError(
       resp,
@@ -33,6 +33,10 @@ const handleCreateUserErrors = (resp: Response, error: unknown): void => {
     respWithError(resp, StatusCodes.BAD_REQUEST, error.message);
     return;
   }
+};
+
+const handleCreateUserErrors = (resp: Response, error: unknown): void => {
+  handleDBValidationErrors(resp, error);
 
   if (error instanceof AuthError) {
     respWithError(resp, error.code, error.message);
@@ -91,4 +95,5 @@ export {
   checkUserStatus,
   handleTokenValidationErrors,
   verifyToken,
+  handleDBValidationErrors,
 };

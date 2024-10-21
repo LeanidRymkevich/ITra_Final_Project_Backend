@@ -2,7 +2,9 @@ import { Router } from 'express';
 
 import adminRightsValidator from '../middlewares/adminRightsValidator';
 import tokenValidator from '../middlewares/tokenValidator';
+
 import { ENDPOINTS } from '../types/enums';
+
 import {
   getAllUsers,
   updateUser,

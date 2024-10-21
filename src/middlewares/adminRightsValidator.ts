@@ -1,8 +1,11 @@
 import { Response, Request, NextFunction } from 'express';
-import User from '../db/models/User';
-import { ERROR_MSGs, USER_ROLES } from '../types/enums';
-import { respWithError } from '../utils/respUtils';
 import { StatusCodes } from 'http-status-codes';
+
+import User from '../db/models/User';
+
+import { ERROR_MSGs, USER_ROLES } from '../types/enums';
+
+import { respWithError } from '../utils/respUtils';
 
 const adminRightsValidator = async (
   req: Request,

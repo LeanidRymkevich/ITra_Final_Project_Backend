@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 
 import User from '../db/models/User';
+
 import { respWithData } from '../utils/respUtils';
-import { StatusCodes } from 'http-status-codes';
 import { delPasswordField } from '../utils/dataTransformUtils';
-import { handleDBValidationErrors } from '../utils/authUtils';
 
 const getAllUsers = async (_req: Request, resp: Response): Promise<void> => {
   const users: User[] = await User.findAll();
@@ -26,7 +26,7 @@ const updateUser = async (req: Request, resp: Response): Promise<void> => {
     });
     respWithData(resp, StatusCodes.OK, result);
   } catch (error) {
-    handleDBValidationErrors(resp, error);
+    // handleDBValidationErrors(resp, error);
   }
 };
 

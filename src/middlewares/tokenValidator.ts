@@ -5,12 +5,10 @@ import User from '../db/models/User';
 import { ERROR_MSGs } from '../types/enums';
 import { StatusCodes } from 'http-status-codes';
 
-import { AuthError } from '../errors/AuthError';
-import {
-  checkUserStatus,
-  handleTokenValidationErrors,
-  verifyToken,
-} from '../utils/authUtils';
+import CustomError from '../errors/CustomError';
+
+import { checkUserStatus, verifyToken } from '../utils/authUtils';
+import { handleTokenValidationErrors } from '../utils/respUtils';
 
 const tokenValidator = async (
   req: Request,
@@ -21,7 +19,7 @@ const tokenValidator = async (
 
   try {
     if (!authorization)
-      throw new AuthError(ERROR_MSGs.NO_TOKEN, StatusCodes.UNAUTHORIZED);
+      throw new CustomError(ERROR_MSGs.NO_TOKEN, StatusCodes.UNAUTHORIZED);
 
     // authorization pattern 'Bearer [token string without brackets]'
     const token = authorization.split(' ')[1]!;

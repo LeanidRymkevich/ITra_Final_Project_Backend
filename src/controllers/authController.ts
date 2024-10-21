@@ -2,16 +2,16 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
 import User from '../db/models/User';
-import {
-  createToken,
-  hashPassword,
-  handleCreateUserErrors,
-  signInChecks,
-  handleSignInErrors,
-} from '../utils/authUtils';
-import { respWithData } from '../utils/respUtils';
-import { AuthError } from '../errors/AuthError';
+import CustomError from '../errors/CustomError';
+
 import { ERROR_MSGs } from '../types/enums';
+
+import { createToken, hashPassword, signInChecks } from '../utils/authUtils';
+import {
+  handleSignInErrors,
+  respWithData,
+  handleSignUpErrors,
+} from '../utils/respUtils';
 import { delPasswordField } from '../utils/dataTransformUtils';
 
 const sendCheckTokenResp = (_req: Request, resp: Response): void => {
@@ -23,7 +23,7 @@ const signUp = async (req: Request, resp: Response): Promise<void> => {
 
   try {
     if (!password)
-      throw new AuthError(ERROR_MSGs.NO_PASSWORD, StatusCodes.BAD_REQUEST);
+      throw new CustomError(ERROR_MSGs.NO_PASSWORD, StatusCodes.BAD_REQUEST);
 
     const { id, role, status } = await User.create({
       email,
@@ -35,7 +35,7 @@ const signUp = async (req: Request, resp: Response): Promise<void> => {
 
     respWithData(resp, StatusCodes.CREATED, data, token);
   } catch (error) {
-    handleCreateUserErrors(resp, error);
+    handleSignUpErrors(resp, error);
   }
 };
 

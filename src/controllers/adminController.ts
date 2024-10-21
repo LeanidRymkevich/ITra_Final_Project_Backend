@@ -21,20 +21,20 @@ const getAllUsers = async (_req: Request, resp: Response): Promise<void> => {
 
 const updateUser = async (req: Request, resp: Response): Promise<void> => {
   const id = req.params[ID_ENDPOINTS_PARAM];
-  const { user, ...data } = req.body;
+  const { current_user, ...data } = req.body;
 
   try {
-    const result = await User.update(data, {
-      where: {
-        id,
-      },
-    });
-    if (!result[0])
+    const user = await User.findByPk(id);
+
+    if (!user)
       throw new CustomError(
         ERROR_MSGs.NO_USER_WITH_SUCH_ID,
         StatusCodes.NOT_FOUND
       );
-    respWithData(resp, StatusCodes.OK, data);
+
+    user.set({ ...data });
+    await user.save();
+    respWithData(resp, StatusCodes.OK, delPasswordField(user));
   } catch (error) {
     handleCustomErrorOnly(resp, error);
   }

@@ -4,6 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import User from '../db/models/User';
 
 import { ERROR_MSGs, USER_ROLES } from '../types/enums';
+import { CURRENT_USER_BODY_PROP } from '../constants/constants';
 
 import { respWithError } from '../utils/respUtils';
 
@@ -12,7 +13,7 @@ const adminRightsValidator = async (
   resp: Response,
   next: NextFunction
 ): Promise<void> => {
-  const user: User = req.body.user;
+  const user: User = req.body[CURRENT_USER_BODY_PROP];
 
   if (user.role === USER_ROLES.ADMIN) {
     next();

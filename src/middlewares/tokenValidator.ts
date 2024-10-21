@@ -4,6 +4,7 @@ import User from '../db/models/User';
 
 import { ERROR_MSGs } from '../types/enums';
 import { StatusCodes } from 'http-status-codes';
+import { CURRENT_USER_BODY_PROP } from '../constants/constants';
 
 import CustomError from '../errors/CustomError';
 
@@ -24,10 +25,10 @@ const tokenValidator = async (
     // authorization pattern 'Bearer [token string without brackets]'
     const token = authorization.split(' ')[1]!;
     const id = verifyToken(token);
-    const user: User | null = await User.findOne({ where: { id } });
+    const user: User | null = await User.findByPk(id);
 
     checkUserStatus(user);
-    req.body.user = user;
+    req.body[CURRENT_USER_BODY_PROP] = user;
     return next();
   } catch (error) {
     handleCustomErrorOnly(resp, error);

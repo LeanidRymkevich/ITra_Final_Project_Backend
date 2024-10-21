@@ -52,11 +52,19 @@ User.init(
       type: DataTypes.ENUM(USER_ROLES.ADMIN, USER_ROLES.USER),
       allowNull: false,
       defaultValue: USER_ROLES.USER,
+      validate: {
+        notEmpty: true,
+        isIn: [[USER_ROLES.ADMIN, USER_ROLES.USER]],
+      },
     },
     status: {
       type: DataTypes.ENUM(USER_STATUS.ACTIVE, USER_STATUS.BLOCKED),
       allowNull: false,
       defaultValue: USER_STATUS.ACTIVE,
+      validate: {
+        notEmpty: true,
+        isIn: [[USER_STATUS.ACTIVE, USER_STATUS.BLOCKED]],
+      },
     },
   },
   {

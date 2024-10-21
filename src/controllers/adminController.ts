@@ -40,6 +40,23 @@ const updateUser = async (req: Request, resp: Response): Promise<void> => {
   }
 };
 
-const deleteUser = async (_req: Request, _resp: Response): Promise<void> => {};
+const deleteUser = async (req: Request, resp: Response): Promise<void> => {
+  const id = req.params[ID_ENDPOINTS_PARAM];
+
+  try {
+    const user = await User.findByPk(id);
+
+    if (!user)
+      throw new CustomError(
+        ERROR_MSGs.NO_USER_WITH_SUCH_ID,
+        StatusCodes.NOT_FOUND
+      );
+
+    await user.destroy();
+    respWithData(resp, StatusCodes.NO_CONTENT, {});
+  } catch (error) {
+    handleCustomErrorOnly(resp, error);
+  }
+};
 
 export { getAllUsers, updateUser, deleteUser };

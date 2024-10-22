@@ -49,7 +49,7 @@ const signIn = async (req: Request, resp: Response): Promise<void> => {
       },
     });
 
-    signInChecks(user, password);
+    await signInChecks(user, password);
     const data = delPasswordField(user!);
     const token = createToken(`${data.id}`);
 

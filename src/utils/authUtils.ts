@@ -23,9 +23,12 @@ const checkUserStatus = (user: User | null): void => {
     throw new CustomError(ERROR_MSGs.USER_IS_BLOCKED, StatusCodes.UNAUTHORIZED);
 };
 
-const signInChecks = (user: User | null, password: string): void => {
+const signInChecks = async (
+  user: User | null,
+  password: string
+): Promise<void> => {
   checkUserStatus(user);
-  if (!compare(password, user!.password))
+  if (!(await compare(password, user!.password)))
     throw new CustomError(ERROR_MSGs.WRONG_PASSWORD, StatusCodes.UNAUTHORIZED);
 };
 

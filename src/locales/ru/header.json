@@ -20,5 +20,8 @@
   "SearchPlaceholder": "Поиск...",
 
   "LanguageEn": "Английский",
-  "LanguageRu": "Русский"
+  "LanguageRu": "Русский",
+
+  "GoToSignIn": "Перейти к странице входа",
+  "GoToSignUp": "Перейти к странице регистрации"
 }

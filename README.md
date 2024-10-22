@@ -1,4 +1,4 @@
-# Sever description
+# Server description
 
 **App name**: _questionforms_.
 

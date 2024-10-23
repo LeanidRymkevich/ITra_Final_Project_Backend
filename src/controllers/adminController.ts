@@ -11,7 +11,9 @@ import CustomError from '../errors/CustomError';
 import { ERROR_MSGs } from '../types/enums';
 
 const getAllUsers = async (req: Request, resp: Response): Promise<void> => {
-  const { limit, offset } = req.body;
+  let { limit: reqLimit, offset: reqOffset } = req.query;
+  const limit = reqLimit ? +reqLimit : 0;
+  const offset = reqOffset ? +reqOffset : 0;
 
   const total = await User.count();
   const users: User[] = await User.findAll({ limit, offset });

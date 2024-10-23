@@ -57,7 +57,7 @@ const deleteUser = async (req: Request, resp: Response): Promise<void> => {
       );
 
     await user.destroy();
-    respWithData(resp, StatusCodes.NO_CONTENT, {});
+    respWithData(resp, StatusCodes.OK, { id });
   } catch (error) {
     handleCustomErrorOnly(resp, error);
   }

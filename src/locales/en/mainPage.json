@@ -1,0 +1,13 @@
+{
+  "Greetings": "Greetings.",
+  "FeaturesListTitle": "My version of the task solution implements the following functionality",
+  "Feature1": "login and registration pages",
+  "Feature2": "routing",
+  "Feature3": "admin page",
+  "Feature4": "changing the application theme",
+  "Feature5": "localization into Russian and English",
+  "Feature6": "backend to the above",
+  "AddInfo": "To access the admin page, use the following login data (since by default all users are registered as users and only the admin can add them to admins, initially admins are created in the database manually)",
+  "enterEmail": "email - admin@gmail.com",
+  "enterPassword": "password - admin"
+}

@@ -18,7 +18,7 @@ const hashPassword = (password: string): string => {
 
 const checkUserStatus = (user: User | null): void => {
   if (!user)
-    throw new CustomError(ERROR_MSGs.NO_SUCH_USER, StatusCodes.NOT_FOUND);
+    throw new CustomError(ERROR_MSGs.NO_SUCH_USER, StatusCodes.UNAUTHORIZED);
   if (user.status === USER_STATUS.BLOCKED)
     throw new CustomError(ERROR_MSGs.USER_IS_BLOCKED, StatusCodes.UNAUTHORIZED);
 };

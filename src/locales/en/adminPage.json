@@ -1,0 +1,21 @@
+{
+  "TableName": "Users",
+
+  "selected": "selected",
+  "username": "Username",
+  "email": "Email",
+  "role": "Role",
+  "status": "Status",
+  "RowsPerPage": "Rows per page",
+
+  "active": "Active",
+  "blocked": "Blocked",
+  "admin": "Admin",
+  "user": "User",
+
+  "block": "Block",
+  "unblock": "Unblock",
+  "addToAdmins": "Add to admins",
+  "removeFromAdmins": "Remove from admins",
+  "delete": "Delete"
+}

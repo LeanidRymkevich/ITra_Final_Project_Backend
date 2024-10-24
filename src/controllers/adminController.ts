@@ -4,19 +4,24 @@ import { StatusCodes } from 'http-status-codes';
 import User from '../db/models/User';
 
 import { handleCustomErrorOnly, respWithData } from '../utils/respUtils';
-import { delPasswordField } from '../utils/dataTransformUtils';
+import {
+  delPasswordField,
+  getGetAllQueryParams,
+} from '../utils/dataTransformUtils';
 
 import { ID_ENDPOINTS_PARAM } from '../constants/constants';
 import CustomError from '../errors/CustomError';
 import { ERROR_MSGs } from '../types/enums';
 
 const getAllUsers = async (req: Request, resp: Response): Promise<void> => {
-  let { limit: reqLimit, offset: reqOffset } = req.query;
-  const limit = reqLimit ? +reqLimit : 0;
-  const offset = reqOffset ? +reqOffset : 0;
+  const { limit, offset, order, orderBy } = getGetAllQueryParams(req);
 
   const total = await User.count();
-  const users: User[] = await User.findAll({ limit, offset });
+  const users: User[] = await User.findAll({
+    limit,
+    offset,
+    order: [[orderBy, order]],
+  });
   respWithData(resp, StatusCodes.OK, {
     users: users.map((user) => delPasswordField(user)),
     total,
